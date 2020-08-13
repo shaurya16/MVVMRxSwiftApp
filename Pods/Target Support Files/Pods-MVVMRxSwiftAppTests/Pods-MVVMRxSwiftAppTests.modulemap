@@ -1,0 +1,6 @@
+module Pods_MVVMRxSwiftAppTests {
+  umbrella header "Pods-MVVMRxSwiftAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

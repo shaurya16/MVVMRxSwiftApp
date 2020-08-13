@@ -10,3 +10,10 @@ target 'MVVMRxSwiftApp' do
   pod 'RxCocoa'
 
 end
+
+target 'MVVMRxSwiftAppTests' do
+
+  inherit! :search_paths
+  pod 'RxTest'
+
+end
