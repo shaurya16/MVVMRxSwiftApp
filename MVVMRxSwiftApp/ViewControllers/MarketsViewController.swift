@@ -81,7 +81,9 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate, UITableView
                 cell.trendImageView.image = UIImage(named: "trendNegative")
                 cell.percentageLabel.textColor = .red
             }
-            cell.currencySumbolLabel.text = self.addSubstring(pair: item.pair, char: "/")
+            let pairName = self.addSubstring(pair: item.pair, char: "/")
+            cell.currencySumbolLabel.text = pairName
+            cell.subTitleLabel.text = "\(pairName) : Forex"
         }.disposed(by: disposeBag)
         
     }
@@ -99,7 +101,7 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 52
+        return 40
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

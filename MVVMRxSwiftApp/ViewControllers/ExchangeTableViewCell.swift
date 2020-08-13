@@ -12,6 +12,7 @@ import UIKit
 class ExchangeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var currencySymbolView: UIView!
+    @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var percentageLabel: UILabel!
     @IBOutlet weak var sellRateLabel: UILabel!
     @IBOutlet weak var buyRateLabel: UILabel!

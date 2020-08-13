@@ -50,18 +50,27 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEG-rs-m3u">
-                                                            <rect key="frame" x="15" y="23" width="85" height="22.5"/>
+                                                            <rect key="frame" x="8" y="23" width="92" height="23"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwO-wS-8K2">
+                                                            <rect key="frame" x="8" y="47" width="102" height="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="eEG-rs-m3u" firstAttribute="leading" secondItem="TDh-OT-0wF" secondAttribute="leading" constant="15" id="JQE-jK-Cmk"/>
+                                                        <constraint firstItem="eEG-rs-m3u" firstAttribute="leading" secondItem="TDh-OT-0wF" secondAttribute="leading" constant="8" id="JQE-jK-Cmk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OwO-wS-8K2" secondAttribute="trailing" id="PQy-3T-gVg"/>
                                                         <constraint firstItem="eEG-rs-m3u" firstAttribute="top" secondItem="TDh-OT-0wF" secondAttribute="top" constant="23" id="QRh-Qd-Xcf"/>
                                                         <constraint firstAttribute="trailing" secondItem="eEG-rs-m3u" secondAttribute="trailing" constant="10" id="YpY-sf-Qdz"/>
+                                                        <constraint firstItem="OwO-wS-8K2" firstAttribute="top" secondItem="eEG-rs-m3u" secondAttribute="bottom" constant="1.5" id="csT-tq-sxY"/>
                                                         <constraint firstAttribute="width" constant="110" id="fRd-XJ-wnn"/>
                                                         <constraint firstAttribute="bottom" secondItem="eEG-rs-m3u" secondAttribute="bottom" constant="26.5" id="kDO-7D-3DH"/>
+                                                        <constraint firstItem="OwO-wS-8K2" firstAttribute="leading" secondItem="TDh-OT-0wF" secondAttribute="leading" constant="8" id="myt-ug-g8a"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5r-Ya-AMJ">
@@ -113,6 +122,7 @@
                                             <outlet property="currencySymbolView" destination="TDh-OT-0wF" id="vRL-Qf-7gR"/>
                                             <outlet property="percentageLabel" destination="R5r-Ya-AMJ" id="yH7-d7-H1H"/>
                                             <outlet property="sellRateLabel" destination="I5K-09-PXa" id="GGe-d2-4bx"/>
+                                            <outlet property="subTitleLabel" destination="OwO-wS-8K2" id="Tax-qh-Oes"/>
                                             <outlet property="trendImageView" destination="9o2-qd-Rfs" id="rmH-yp-aL3"/>
                                         </connections>
                                     </tableViewCell>
