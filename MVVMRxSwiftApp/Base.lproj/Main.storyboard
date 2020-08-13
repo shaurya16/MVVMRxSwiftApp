@@ -50,7 +50,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEG-rs-m3u">
-                                                            <rect key="frame" x="15" y="25" width="85" height="20.5"/>
+                                                            <rect key="frame" x="15" y="23" width="85" height="22.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="eEG-rs-m3u" firstAttribute="leading" secondItem="TDh-OT-0wF" secondAttribute="leading" constant="15" id="JQE-jK-Cmk"/>
-                                                        <constraint firstItem="eEG-rs-m3u" firstAttribute="top" secondItem="TDh-OT-0wF" secondAttribute="top" constant="25" id="QRh-Qd-Xcf"/>
+                                                        <constraint firstItem="eEG-rs-m3u" firstAttribute="top" secondItem="TDh-OT-0wF" secondAttribute="top" constant="23" id="QRh-Qd-Xcf"/>
                                                         <constraint firstAttribute="trailing" secondItem="eEG-rs-m3u" secondAttribute="trailing" constant="10" id="YpY-sf-Qdz"/>
                                                         <constraint firstAttribute="width" constant="110" id="fRd-XJ-wnn"/>
                                                         <constraint firstAttribute="bottom" secondItem="eEG-rs-m3u" secondAttribute="bottom" constant="26.5" id="kDO-7D-3DH"/>
@@ -114,6 +114,81 @@
                                             <outlet property="percentageLabel" destination="R5r-Ya-AMJ" id="yH7-d7-H1H"/>
                                             <outlet property="sellRateLabel" destination="I5K-09-PXa" id="GGe-d2-4bx"/>
                                             <outlet property="trendImageView" destination="9o2-qd-Rfs" id="rmH-yp-aL3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell2" rowHeight="52" id="CT3-uu-XPB" customClass="ExchangeTableViewCell" customModule="MVVMRxSwiftApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="102" width="414" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CT3-uu-XPB" id="QxK-LQ-5hE">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwl-4D-ubU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="110" height="50.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1f4-lA-vEz">
+                                                            <rect key="frame" x="17" y="18" width="85" height="14.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="1f4-lA-vEz" secondAttribute="bottom" constant="18" id="1HR-V6-JSg"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1f4-lA-vEz" secondAttribute="trailing" constant="8" id="2SL-tw-yjE"/>
+                                                        <constraint firstItem="1f4-lA-vEz" firstAttribute="leading" secondItem="Wwl-4D-ubU" secondAttribute="leading" constant="17" id="KBN-3u-uu9"/>
+                                                        <constraint firstItem="1f4-lA-vEz" firstAttribute="top" secondItem="Wwl-4D-ubU" secondAttribute="top" constant="18" id="iVu-BV-eVe"/>
+                                                        <constraint firstAttribute="width" constant="110" id="jbc-4R-EOK"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQ2-jh-ruk">
+                                                    <rect key="frame" x="138" y="17" width="80" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="oMo-gj-swT"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRc-c5-9JB">
+                                                    <rect key="frame" x="230" y="17" width="80" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="I9B-vG-xff"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIM-ru-9Re">
+                                                    <rect key="frame" x="322" y="17" width="80" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="MHP-Sq-H5v"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="MRc-c5-9JB" firstAttribute="leading" secondItem="eQ2-jh-ruk" secondAttribute="trailing" constant="12" id="06r-rY-IzF"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oIM-ru-9Re" secondAttribute="trailing" constant="-8" id="BD6-VM-p5c"/>
+                                                <constraint firstItem="eQ2-jh-ruk" firstAttribute="top" secondItem="QxK-LQ-5hE" secondAttribute="topMargin" constant="6" id="DMZ-z6-GaS"/>
+                                                <constraint firstItem="eQ2-jh-ruk" firstAttribute="leading" secondItem="Wwl-4D-ubU" secondAttribute="trailing" constant="28" id="Iim-BK-phg"/>
+                                                <constraint firstItem="Wwl-4D-ubU" firstAttribute="leading" secondItem="QxK-LQ-5hE" secondAttribute="leading" id="Qrr-wl-QAj"/>
+                                                <constraint firstItem="oIM-ru-9Re" firstAttribute="width" secondItem="eQ2-jh-ruk" secondAttribute="width" id="bI7-f7-0pi"/>
+                                                <constraint firstItem="oIM-ru-9Re" firstAttribute="leading" secondItem="MRc-c5-9JB" secondAttribute="trailing" constant="12" id="c9D-vF-VpB"/>
+                                                <constraint firstItem="oIM-ru-9Re" firstAttribute="top" secondItem="QxK-LQ-5hE" secondAttribute="topMargin" constant="6" id="cBj-Ov-R4u"/>
+                                                <constraint firstItem="Wwl-4D-ubU" firstAttribute="top" secondItem="QxK-LQ-5hE" secondAttribute="top" id="pxG-7a-pFD"/>
+                                                <constraint firstItem="MRc-c5-9JB" firstAttribute="width" secondItem="eQ2-jh-ruk" secondAttribute="width" id="qDa-aP-tsl"/>
+                                                <constraint firstItem="MRc-c5-9JB" firstAttribute="top" secondItem="QxK-LQ-5hE" secondAttribute="topMargin" constant="6" id="x94-bk-r0D"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buyRateLabel" destination="oIM-ru-9Re" id="fbI-IN-wLk"/>
+                                            <outlet property="currencySumbolLabel" destination="1f4-lA-vEz" id="Nwt-wW-w9i"/>
+                                            <outlet property="currencySymbolView" destination="Wwl-4D-ubU" id="MKx-Wd-YL7"/>
+                                            <outlet property="percentageLabel" destination="eQ2-jh-ruk" id="xPw-QN-tvz"/>
+                                            <outlet property="sellRateLabel" destination="MRc-c5-9JB" id="RJ5-s3-SaH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

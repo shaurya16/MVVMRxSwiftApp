@@ -25,6 +25,7 @@
 		D9501F2324E1E0BF00A6B630 /* Pairs.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F2224E1E0BF00A6B630 /* Pairs.json */; };
 		D9501F2524E1E83200A6B630 /* CurrencyListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F2424E1E83200A6B630 /* CurrencyListModel.swift */; };
 		D9501F2724E32CE200A6B630 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F2624E32CE200A6B630 /* APIManager.swift */; };
+		D9501F2924E55E1100A6B630 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F2824E55E1100A6B630 /* HeaderTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		D9501F2224E1E0BF00A6B630 /* Pairs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pairs.json; sourceTree = "<group>"; };
 		D9501F2424E1E83200A6B630 /* CurrencyListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListModel.swift; sourceTree = "<group>"; };
 		D9501F2624E32CE200A6B630 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		D9501F2824E55E1100A6B630 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				D9501EE624E17E0700A6B630 /* TabBarViewController.swift */,
 				D9501F1324E181AA00A6B630 /* MarketsViewController.swift */,
 				D9501F1524E188BD00A6B630 /* ExchangeTableViewCell.swift */,
+				D9501F2824E55E1100A6B630 /* HeaderTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				D9501F2724E32CE200A6B630 /* APIManager.swift in Sources */,
 				D9501F1424E181AA00A6B630 /* MarketsViewController.swift in Sources */,
 				D9501EE724E17E0700A6B630 /* TabBarViewController.swift in Sources */,
+				D9501F2924E55E1100A6B630 /* HeaderTableViewCell.swift in Sources */,
 				D9501EE324E17E0700A6B630 /* AppDelegate.swift in Sources */,
 				D9501F1E24E1D34F00A6B630 /* CurrencyService.swift in Sources */,
 				D9501F2524E1E83200A6B630 /* CurrencyListModel.swift in Sources */,

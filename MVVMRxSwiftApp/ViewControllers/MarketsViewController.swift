@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MarketsViewController: UIViewController, UIScrollViewDelegate {
+class MarketsViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -84,6 +84,22 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate {
             cell.currencySumbolLabel.text = self.addSubstring(pair: item.pair, char: "/")
         }.disposed(by: disposeBag)
         
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "customCell2") as? ExchangeTableViewCell else {
+            return UIView()
+        }
+        headerCell.currencySumbolLabel.text = "Symbol"
+        headerCell.percentageLabel.text = "Change"
+        headerCell.sellRateLabel.text = "Sell"
+        headerCell.buyRateLabel.text = "Buy"
+        headerCell.backgroundColor = .white
+        return headerCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 52
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
