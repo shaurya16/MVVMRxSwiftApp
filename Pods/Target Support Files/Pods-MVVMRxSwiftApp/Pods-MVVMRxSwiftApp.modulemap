@@ -1,0 +1,6 @@
+framework module Pods_MVVMRxSwiftApp {
+  umbrella header "Pods-MVVMRxSwiftApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
