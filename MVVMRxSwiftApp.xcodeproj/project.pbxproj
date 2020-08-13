@@ -22,10 +22,24 @@
 		D9501F1B24E1D31E00A6B630 /* CurrencyPairsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F1A24E1D31E00A6B630 /* CurrencyPairsMock.json */; };
 		D9501F1E24E1D34F00A6B630 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1D24E1D34F00A6B630 /* CurrencyService.swift */; };
 		D9501F2024E1D8BD00A6B630 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1F24E1D8BD00A6B630 /* CurrencyListViewModel.swift */; };
-		D9501F2324E1E0BF00A6B630 /* Pairs.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F2224E1E0BF00A6B630 /* Pairs.json */; };
+		D9501F2324E1E0BF00A6B630 /* USDGBP.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F2224E1E0BF00A6B630 /* USDGBP.json */; };
 		D9501F2524E1E83200A6B630 /* CurrencyListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F2424E1E83200A6B630 /* CurrencyListModel.swift */; };
 		D9501F2724E32CE200A6B630 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F2624E32CE200A6B630 /* APIManager.swift */; };
 		D9501F2924E55E1100A6B630 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F2824E55E1100A6B630 /* HeaderTableViewCell.swift */; };
+		D9501F2B24E5BD1400A6B630 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F2A24E5BD1300A6B630 /* MockAPIManager.swift */; };
+		D9501F4924E5CB4E00A6B630 /* USDEUR.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F2E24E5C03700A6B630 /* USDEUR.json */; };
+		D9501F4A24E5CB5200A6B630 /* USDJPY.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3024E5C05000A6B630 /* USDJPY.json */; };
+		D9501F4B24E5CB5800A6B630 /* USDCAD.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3224E5C06400A6B630 /* USDCAD.json */; };
+		D9501F4C24E5CB5B00A6B630 /* USDCHF.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3424E5C08B00A6B630 /* USDCHF.json */; };
+		D9501F4D24E5CB5E00A6B630 /* USDHKD.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3624E5C09B00A6B630 /* USDHKD.json */; };
+		D9501F4E24E5CB6100A6B630 /* USDINR.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3824E5C0B100A6B630 /* USDINR.json */; };
+		D9501F4F24E5CB6500A6B630 /* USDEUR-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3B24E5C0FF00A6B630 /* USDEUR-2.json */; };
+		D9501F5024E5CB6800A6B630 /* USDJPY-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3D24E5C11100A6B630 /* USDJPY-2.json */; };
+		D9501F5124E5CB6B00A6B630 /* USDGBP-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3F24E5C11D00A6B630 /* USDGBP-2.json */; };
+		D9501F5224E5CB6E00A6B630 /* USDCAD-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4124E5C12B00A6B630 /* USDCAD-2.json */; };
+		D9501F5324E5CB7100A6B630 /* USDCHF-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4324E5C13800A6B630 /* USDCHF-2.json */; };
+		D9501F5424E5CB7400A6B630 /* USDHKD-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4524E5C14600A6B630 /* USDHKD-2.json */; };
+		D9501F5524E5CB7700A6B630 /* USDINR-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4724E5C15200A6B630 /* USDINR-2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,10 +83,24 @@
 		D9501F1A24E1D31E00A6B630 /* CurrencyPairsMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CurrencyPairsMock.json; sourceTree = "<group>"; };
 		D9501F1D24E1D34F00A6B630 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		D9501F1F24E1D8BD00A6B630 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
-		D9501F2224E1E0BF00A6B630 /* Pairs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pairs.json; sourceTree = "<group>"; };
+		D9501F2224E1E0BF00A6B630 /* USDGBP.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = USDGBP.json; sourceTree = "<group>"; };
 		D9501F2424E1E83200A6B630 /* CurrencyListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListModel.swift; sourceTree = "<group>"; };
 		D9501F2624E32CE200A6B630 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		D9501F2824E55E1100A6B630 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		D9501F2A24E5BD1300A6B630 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
+		D9501F2E24E5C03700A6B630 /* USDEUR.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = USDEUR.json; sourceTree = "<group>"; };
+		D9501F3024E5C05000A6B630 /* USDJPY.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = USDJPY.json; sourceTree = "<group>"; };
+		D9501F3224E5C06400A6B630 /* USDCAD.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = USDCAD.json; sourceTree = "<group>"; };
+		D9501F3424E5C08B00A6B630 /* USDCHF.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = USDCHF.json; sourceTree = "<group>"; };
+		D9501F3624E5C09B00A6B630 /* USDHKD.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = USDHKD.json; sourceTree = "<group>"; };
+		D9501F3824E5C0B100A6B630 /* USDINR.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = USDINR.json; sourceTree = "<group>"; };
+		D9501F3B24E5C0FF00A6B630 /* USDEUR-2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "USDEUR-2.json"; sourceTree = "<group>"; };
+		D9501F3D24E5C11100A6B630 /* USDJPY-2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "USDJPY-2.json"; sourceTree = "<group>"; };
+		D9501F3F24E5C11D00A6B630 /* USDGBP-2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "USDGBP-2.json"; sourceTree = "<group>"; };
+		D9501F4124E5C12B00A6B630 /* USDCAD-2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "USDCAD-2.json"; sourceTree = "<group>"; };
+		D9501F4324E5C13800A6B630 /* USDCHF-2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "USDCHF-2.json"; sourceTree = "<group>"; };
+		D9501F4524E5C14600A6B630 /* USDHKD-2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "USDHKD-2.json"; sourceTree = "<group>"; };
+		D9501F4724E5C15200A6B630 /* USDINR-2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "USDINR-2.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +179,8 @@
 		D9501EF824E17E0B00A6B630 /* MVVMRxSwiftAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				D9501F2C24E5BE1600A6B630 /* MockData */,
+				D9501F2A24E5BD1300A6B630 /* MockAPIManager.swift */,
 				D9501EF924E17E0B00A6B630 /* MVVMRxSwiftAppTests.swift */,
 				D9501EFB24E17E0B00A6B630 /* Info.plist */,
 			);
@@ -182,8 +212,6 @@
 			children = (
 				D9501F1824E1BB3F00A6B630 /* CurrencyPairsModel.swift */,
 				D9501F2424E1E83200A6B630 /* CurrencyListModel.swift */,
-				D9501F1A24E1D31E00A6B630 /* CurrencyPairsMock.json */,
-				D9501F2224E1E0BF00A6B630 /* Pairs.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,6 +231,44 @@
 				D9501F1F24E1D8BD00A6B630 /* CurrencyListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D9501F2C24E5BE1600A6B630 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				D9501F1A24E1D31E00A6B630 /* CurrencyPairsMock.json */,
+				D9501F2D24E5BF4E00A6B630 /* FirstRequest */,
+				D9501F3A24E5C0C800A6B630 /* SecondRequest */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
+		D9501F2D24E5BF4E00A6B630 /* FirstRequest */ = {
+			isa = PBXGroup;
+			children = (
+				D9501F2E24E5C03700A6B630 /* USDEUR.json */,
+				D9501F3024E5C05000A6B630 /* USDJPY.json */,
+				D9501F2224E1E0BF00A6B630 /* USDGBP.json */,
+				D9501F3224E5C06400A6B630 /* USDCAD.json */,
+				D9501F3424E5C08B00A6B630 /* USDCHF.json */,
+				D9501F3624E5C09B00A6B630 /* USDHKD.json */,
+				D9501F3824E5C0B100A6B630 /* USDINR.json */,
+			);
+			path = FirstRequest;
+			sourceTree = "<group>";
+		};
+		D9501F3A24E5C0C800A6B630 /* SecondRequest */ = {
+			isa = PBXGroup;
+			children = (
+				D9501F3B24E5C0FF00A6B630 /* USDEUR-2.json */,
+				D9501F3D24E5C11100A6B630 /* USDJPY-2.json */,
+				D9501F3F24E5C11D00A6B630 /* USDGBP-2.json */,
+				D9501F4124E5C12B00A6B630 /* USDCAD-2.json */,
+				D9501F4324E5C13800A6B630 /* USDCHF-2.json */,
+				D9501F4524E5C14600A6B630 /* USDHKD-2.json */,
+				D9501F4724E5C15200A6B630 /* USDINR-2.json */,
+			);
+			path = SecondRequest;
 			sourceTree = "<group>";
 		};
 		F5E78C611650CF4A00E890E3 /* Pods */ = {
@@ -321,10 +387,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9501EEF24E17E0B00A6B630 /* LaunchScreen.storyboard in Resources */,
+				D9501F5324E5CB7100A6B630 /* USDCHF-2.json in Resources */,
 				D9501EEC24E17E0B00A6B630 /* Assets.xcassets in Resources */,
+				D9501F5524E5CB7700A6B630 /* USDINR-2.json in Resources */,
+				D9501F4A24E5CB5200A6B630 /* USDJPY.json in Resources */,
+				D9501F5124E5CB6B00A6B630 /* USDGBP-2.json in Resources */,
+				D9501F5224E5CB6E00A6B630 /* USDCAD-2.json in Resources */,
+				D9501F5424E5CB7400A6B630 /* USDHKD-2.json in Resources */,
+				D9501F4E24E5CB6100A6B630 /* USDINR.json in Resources */,
+				D9501F4F24E5CB6500A6B630 /* USDEUR-2.json in Resources */,
+				D9501F5024E5CB6800A6B630 /* USDJPY-2.json in Resources */,
+				D9501F4C24E5CB5B00A6B630 /* USDCHF.json in Resources */,
 				D9501F1B24E1D31E00A6B630 /* CurrencyPairsMock.json in Resources */,
+				D9501F4924E5CB4E00A6B630 /* USDEUR.json in Resources */,
+				D9501F4D24E5CB5E00A6B630 /* USDHKD.json in Resources */,
 				D9501EEA24E17E0700A6B630 /* Main.storyboard in Resources */,
-				D9501F2324E1E0BF00A6B630 /* Pairs.json in Resources */,
+				D9501F2324E1E0BF00A6B630 /* USDGBP.json in Resources */,
+				D9501F4B24E5CB5800A6B630 /* USDCAD.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9501F2B24E5BD1400A6B630 /* MockAPIManager.swift in Sources */,
 				D9501EFA24E17E0B00A6B630 /* MVVMRxSwiftAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

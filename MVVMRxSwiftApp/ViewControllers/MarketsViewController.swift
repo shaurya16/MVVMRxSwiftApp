@@ -21,7 +21,6 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate, UITableView
     
     var currencyListViewModel = CurrencyListViewModel()
     public var currencyList = PublishSubject<[CurrencyListModel]>()
-    public var paginatedCurrencyList = PublishSubject<[CurrencyListModel]>()
     public var equityBalance = PublishSubject<String?>()
     public var assestBalance = PublishSubject<String?>()
     

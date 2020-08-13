@@ -75,7 +75,7 @@ struct Helper {
     static func calculateEquity(array: [CurrencyListModel]) -> String {
         var equityBalance = 0.0
         let _ = array.map { (item) in
-            if (item.pair.hasPrefix("USD")){
+            if (item.pair.hasPrefix(Constants.baseCurrency)){
                 let value = Double(Constants.startingBalance) * item.baseRate
                 let currentValue = (1/item.rate) * value
                 equityBalance += currentValue

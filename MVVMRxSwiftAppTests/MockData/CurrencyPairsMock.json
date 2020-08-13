@@ -1,0 +1,13 @@
+{
+    "message": "'pairs' parameter is required",
+    "supportedPairs": [
+        "USDEUR",
+        "USDJPY",
+        "USDGBP",
+        "USDCAD",
+        "USDCHF",
+        "USDHKD",
+        "USDINR",
+    ],
+    "code": 1001
+}

@@ -13,7 +13,7 @@ import RxCocoa
 final class CurrencyListViewModel {
     
     public var showCount = 20
-    private let currencyService: CurrencyServiceInterface
+    private let apiManager: APIInterface
     private let bag = DisposeBag()
     
     var currencyListModelArray = [CurrencyListModel]()
@@ -26,8 +26,8 @@ final class CurrencyListViewModel {
     public let equityBalance: PublishSubject<String?> = PublishSubject()
     public let assestBalance: PublishSubject<String?> = PublishSubject()
     
-    init(currencyService: CurrencyServiceInterface = CurrencyService()) {
-        self.currencyService = currencyService
+    init(apiManager: APIInterface = APIManager()) {
+        self.apiManager = apiManager
     }
     
 }
@@ -38,7 +38,7 @@ extension CurrencyListViewModel {
     public func fetchData() {
         typealias currencyPair = Result<SupportedPairs,Error>
         
-        APIManager.requestSupportedPairs { (response: currencyPair) in
+        apiManager.requestSupportedPairs { (response: currencyPair) in
             switch response {
             case .success(let supportedPairArray):
                 self.fetchCurrencyPairRate(pairs: supportedPairArray.supportedPairs)
@@ -53,7 +53,7 @@ extension CurrencyListViewModel {
         let myGroup = DispatchGroup()
         for item in pairs {
             myGroup.enter()
-            APIManager.requestCurrencyRate(currencyPair: item) { (response: result) in
+            apiManager.requestCurrencyRate(currencyPair: item) { (response: result) in
                 switch response {
                 case .success(let currencyListModel):
                     print("Response: \(currencyListModel)")
@@ -82,7 +82,7 @@ extension CurrencyListViewModel {
         self.updatedCurrencyListModelArray.removeAll()
         for var item in currencyListModelArray {
             myGroup2.enter()
-            APIManager.requestCurrencyRateForOnePair(currencyPair: item.pair) { (response: result) in
+            apiManager.requestCurrencyRateForOnePair(currencyPair: item.pair) { (response: result) in
                 switch response {
                 case .success(let newRate):
                     print(item.pair)

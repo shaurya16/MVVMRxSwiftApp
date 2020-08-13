@@ -12,14 +12,14 @@ import RxSwift
 
 
 protocol APIInterface {
-        static func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void)
-        static func requestCurrencyRate(currencyPair: String, completion: @escaping (Result<CurrencyListModel, Error>) -> Void)
-        static func requestCurrencyRateForOnePair(currencyPair: String, completion: @escaping (Result<Double, Error>) -> Void)
+        func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void)
+        func requestCurrencyRate(currencyPair: String, completion: @escaping (Result<CurrencyListModel, Error>) -> Void)
+        func requestCurrencyRateForOnePair(currencyPair: String, completion: @escaping (Result<Double, Error>) -> Void)
 }
 
 class APIManager: APIInterface {
     
-    public static func genericRequest<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
+    public func genericRequest<T: Decodable>(url: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let urlRequest = URL(string: url) else {
             return
         }
@@ -37,7 +37,7 @@ class APIManager: APIInterface {
         }.resume()
     }
     
-    public static func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void) {
+    public func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void) {
         guard let urlRequest = URL(string: "https://www.freeforexapi.com/api/live") else {
             return
         }
@@ -59,7 +59,7 @@ class APIManager: APIInterface {
     }
     
     
-    public static func requestCurrencyRate(currencyPair: String, completion: @escaping (Result<CurrencyListModel, Error>) -> Void) {
+    public func requestCurrencyRate(currencyPair: String, completion: @escaping (Result<CurrencyListModel, Error>) -> Void) {
         guard let urlRequest = URL(string: "https://www.freeforexapi.com/api/live?pairs=\(currencyPair)") else {
             return
         }
@@ -83,7 +83,7 @@ class APIManager: APIInterface {
         }.resume()
     }
     
-    public static func requestCurrencyRateForOnePair(currencyPair: String, completion: @escaping (Result<Double, Error>) -> Void) {
+    public func requestCurrencyRateForOnePair(currencyPair: String, completion: @escaping (Result<Double, Error>) -> Void) {
         guard let urlRequest = URL(string: "https://www.freeforexapi.com/api/live?pairs=\(currencyPair)") else {
             return
         }

@@ -7,28 +7,44 @@
 //
 
 import XCTest
+
 @testable import MVVMRxSwiftApp
 
 class MVVMRxSwiftAppTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var viewModel: CurrencyListViewModel!
+    
+    override func setUp() {
+        let mockAPIManager = MockAPIManager()
+        let viewModel = CurrencyListViewModel(apiManager: mockAPIManager)
+        self.viewModel = viewModel
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_ViewModel_FetchData() throws {
+        viewModel.fetchData()
+        XCTAssertEqual(viewModel.currencyListModelArray.first?.pair, "USDEUR")
+        XCTAssertEqual(viewModel.currencyListModelArray.first?.rate, 0.84735)
+        XCTAssertEqual(viewModel.currencyListModelArray.first?.baseRate, viewModel.currencyListModelArray.first?.rate)
+        XCTAssertEqual(viewModel.currencyListModelArray.first?.percentage, 0.0)
+        XCTAssertNotNil(viewModel.currencyListModelArray.first?.buyRate)
+        XCTAssertNotNil(viewModel.currencyListModelArray.first?.sellRate)
+        
+        XCTAssertEqual(viewModel.currencyListModelArray.count, 7)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    
+    func test_ViewModel_UpdateData() throws {
+        viewModel.fetchData()
+        viewModel.update()
+        XCTAssertEqual(viewModel.updatedCurrencyListModelArray.first?.pair, "USDEUR")
+        XCTAssertEqual(viewModel.updatedCurrencyListModelArray.first?.rate, 0.85621)
+        XCTAssertEqual(viewModel.updatedCurrencyListModelArray.first?.baseRate, 0.84735)
+        XCTAssertNotEqual(viewModel.updatedCurrencyListModelArray.first?.percentage, 0.0)
+        XCTAssertNotNil(viewModel.updatedCurrencyListModelArray.first?.buyRate)
+        XCTAssertNotNil(viewModel.updatedCurrencyListModelArray.first?.sellRate)
+        XCTAssertEqual(viewModel.updatedCurrencyListModelArray.count, 7)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    
+    
 
 }
