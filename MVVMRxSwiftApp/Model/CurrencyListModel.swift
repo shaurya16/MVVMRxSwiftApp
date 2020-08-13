@@ -14,6 +14,11 @@ enum trend {
     case none
 }
 
+struct Constants {
+    static var baseCurrency = "USD"
+    static var startingBalance = 10000
+}
+
 struct CurrencyListModel {
     var pair: String
     var rate: Double = 0.0 {
@@ -65,5 +70,22 @@ struct Helper {
     static func removePips(value: Double) -> Double{
         let randomInt = Int.random(in: 1...10)
         return value - (0.0001)*Double(randomInt)
+    }
+    
+    static func calculateEquity(array: [CurrencyListModel]) -> String {
+        var equityBalance = 0.0
+        let _ = array.map { (item) in
+            if (item.pair.hasPrefix("USD")){
+                let value = Double(Constants.startingBalance) * item.baseRate
+                let currentValue = (1/item.rate) * value
+                equityBalance += currentValue
+            }
+        }
+        let roundedEquityBalance = round(equityBalance*1000)/1000
+        return String(roundedEquityBalance)
+    }
+    
+    static func calculateAssests(totalCurrencyPairs: Int) -> String {
+        return String(Constants.startingBalance*totalCurrencyPairs)
     }
 }

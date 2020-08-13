@@ -10,19 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct Constants {
-    static var baseCurrency = "USD"
-    static var startingBalance = 10000
-}
-
 final class CurrencyListViewModel {
     
+    public var showCount = 20
     private let currencyService: CurrencyServiceInterface
     private let bag = DisposeBag()
     
     var currencyListModelArray = [CurrencyListModel]()
     var updatedCurrencyListModelArray = [CurrencyListModel]()
-    var assests = 0.0
     
     var baseCurrencyListModelArray = [CurrencyListModel]()
     var updatedBaseCurrencyListModelArray = [CurrencyListModel]()
@@ -73,13 +68,8 @@ extension CurrencyListViewModel {
         myGroup.notify(queue: .main) {
             print("Completed")
             print(self.currencyListModelArray.count)
-            self.currencyListModelArray.sort { (lhs: CurrencyListModel, rhs: CurrencyListModel) -> Bool in
-                return lhs.pair < rhs.pair
-            }
-            let equityBalance = self.calculateEquity(array: self.currencyListModelArray)
-            self.equityBalance.onNext(equityBalance)
-            self.assestBalance.onNext(self.calculateAssests())
-            self.currencyList.onNext(self.currencyListModelArray)
+            let resultCurrencyListModel = self.prepareCurrencyListModel(currencyListModel: &self.currencyListModelArray)
+            self.currencyList.onNext(resultCurrencyListModel)
         }
     }
 }
@@ -112,34 +102,37 @@ extension CurrencyListViewModel {
         myGroup2.notify(queue: .main) {
             print("Completed Update")
             print(self.updatedCurrencyListModelArray.count)
-            self.updatedCurrencyListModelArray.sort { (lhs: CurrencyListModel, rhs: CurrencyListModel) -> Bool in
-                return lhs.pair < rhs.pair
-            }
-            let equityBalance = self.calculateEquity(array: self.updatedCurrencyListModelArray)
-            self.equityBalance.onNext(equityBalance)
-            self.assestBalance.onNext(self.calculateAssests())
-            self.currencyList.onNext(self.updatedCurrencyListModelArray)
+            let resultCurrencyListModel = self.prepareCurrencyListModel(currencyListModel: &self.updatedCurrencyListModelArray)
+            self.currencyList.onNext(resultCurrencyListModel)
+            self.currencyListModelArray = self.updatedCurrencyListModelArray
         }
+    }
+    
+    private func prepareCurrencyListModel(currencyListModel: inout [CurrencyListModel]) -> [CurrencyListModel] {
+        currencyListModel.sort { (lhs: CurrencyListModel, rhs: CurrencyListModel) -> Bool in
+            return lhs.pair < rhs.pair
+        }
+        let equityBalance = Helper.calculateEquity(array: currencyListModel)
+        self.equityBalance.onNext(equityBalance)
+        self.assestBalance.onNext(Helper.calculateAssests(totalCurrencyPairs: currencyListModel.count))
+        let slicedArray = self.sliceArray(array: currencyListModel, startIndex: 0, endIndex: self.showCount)
+        return slicedArray
     }
 }
 
 extension CurrencyListViewModel {
-    func calculateEquity(array: [CurrencyListModel]) -> String {
-        var equityBalance = 0.0
-        let _ = array.map { (item) in
-            if (item.pair.hasPrefix("USD")){
-                let value = Double(Constants.startingBalance) * item.baseRate
-                let currentValue = (1/item.rate) * value
-                equityBalance += currentValue
-            }
-        }
-        print("Total Assets: \(assests)")
-        print("Equity Balance: \(equityBalance)")
-        let roundedEquityBalance = round(equityBalance*1000)/1000
-        return String(roundedEquityBalance)
+    func fetchNextBatch() {
+        let slicedArray = self.sliceArray(array: self.currencyListModelArray, startIndex: 0, endIndex: self.showCount)
+        self.currencyList.onNext(slicedArray)
     }
     
-    func calculateAssests() -> String {
-        return String(Constants.startingBalance*self.currencyListModelArray.count)
+    func sliceArray(array: [CurrencyListModel], startIndex: Int, endIndex: Int) -> [CurrencyListModel] {
+        if endIndex < array.count {
+            return Array(array[startIndex...endIndex])
+        } else {
+            let length = array.count - 1
+            return Array(array[startIndex...length])
+        }
     }
 }
+

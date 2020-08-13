@@ -20,7 +20,6 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate {
     
     
     var currencyListViewModel = CurrencyListViewModel()
-    var showedCount = 20
     public var currencyList = PublishSubject<[CurrencyListModel]>()
     public var paginatedCurrencyList = PublishSubject<[CurrencyListModel]>()
     public var equityBalance = PublishSubject<String?>()
@@ -67,13 +66,8 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: currencyList)
             .disposed(by: disposeBag)
         
-        currencyList.subscribe(onNext: { currencyListModel in
-            let slicedArray = Array(currencyListModel[0...self.showedCount])
-            self.paginatedCurrencyList.onNext(slicedArray)
-        }).disposed(by: disposeBag)
         
-        
-        paginatedCurrencyList.bind(to: tableView.rx.items(cellIdentifier: "customCell", cellType: ExchangeTableViewCell.self)) {  (row,item,cell) in
+        currencyList.bind(to: tableView.rx.items(cellIdentifier: "customCell", cellType: ExchangeTableViewCell.self)) {  (row,item,cell) in
             cell.percentageLabel.text = String(format: "%.3f", item.percentage)
             cell.buyRateLabel.text = String(format: "%.4f", item.buyRate)
             cell.sellRateLabel.text = String(format: "%.4f", item.sellRate)
@@ -100,6 +94,8 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate {
         if (scrollOffset + scrollViewHeight == scrollContentSizeHeight) {
             // then we are at the end
             print("reached bottom")
+            currencyListViewModel.showCount += 20
+            currencyListViewModel.fetchNextBatch()
         }
     }
     
