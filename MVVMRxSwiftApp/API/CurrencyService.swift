@@ -9,43 +9,40 @@
 import Foundation
 import RxSwift
 
+struct ServiceURL {
+    static let baseURL = "https://www.freeforexapi.com/api/live"
+}
 
 protocol CurrencyServiceInterface {
-    func fetchCurrencyPairs() -> Observable<SupportedPairs>
-    func fetchCurrencyPair(currencyPair: String) -> Observable<CurrencyListModel>
+    func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void)
+    func fetchCurrencyPair(currencyPair: String) -> Observable<[String: Double]>
 }
 
 class CurrencyService: CurrencyServiceInterface {
-    func fetchCurrencyPairs() -> Observable<SupportedPairs>{
-        return Observable.create { observer -> Disposable in
-            guard let url = URL(string: "https://www.freeforexapi.com/api/live") else {
-                observer.onError(NSError(domain: "", code: -1, userInfo: nil))
-                return Disposables.create {}
-            }
-            
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let data = data else {
-                    observer.onError(NSError(domain: "", code: -1, userInfo: nil))
-                    return
-                }
-                do {
-                    let supportedPairs = try JSONDecoder().decode(SupportedPairs.self, from: data)
-                    observer.onNext(supportedPairs)
-                    observer.onCompleted()
-                } catch {
-                    observer.onError(error)
-                }
-            }
-            task.resume()
-            return Disposables.create {
-                task.cancel()
-            }
+    public func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void) {
+        guard let urlRequest = URL(string: ServiceURL.baseURL) else {
+            return
         }
+        let request = URLRequest(url: urlRequest)
+        let _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                do {
+                    let response = try JSONDecoder().decode(SupportedPairs.self, from: data)
+                    print(response)
+                    completion(.success(response))
+                    
+                } catch {
+                    print(error)
+                    completion(.failure(error))
+                }
+            }
+        
+        }.resume()
     }
     
-    func fetchCurrencyPair(currencyPair: String) -> Observable<CurrencyListModel>{
+    func fetchCurrencyPair(currencyPair: String) -> Observable<[String: Double]>{
         return Observable.create { observer -> Disposable in
-            guard let url = URL(string: "https://www.freeforexapi.com/api/live?pairs=\(currencyPair)") else {
+            guard let url = URL(string: "\(ServiceURL.baseURL)?pairs=\(currencyPair)") else {
                 observer.onError(NSError(domain: "", code: -1, userInfo: nil))
                 return Disposables.create {}
             }
@@ -61,11 +58,12 @@ class CurrencyService: CurrencyServiceInterface {
                         observer.onError(NSError(domain: "No rate provided", code: -1, userInfo: nil))
                         return
                     }
-                    let currencyListModel = CurrencyListModel(pair: currencyPair, rate: pairRate.rate)
-                    observer.onNext(currencyListModel)
+                    let pairData = [currencyPair: pairRate.rate]
+                    observer.onNext(pairData)
                     observer.onCompleted()
                 } catch {
-                    observer.onError(error)
+                    print("JSON Decoder error, cannot find rates for the pair \(currencyPair)")
+                    observer.onCompleted()
                 }
             }
             task.resume()
@@ -74,6 +72,5 @@ class CurrencyService: CurrencyServiceInterface {
             }
         }
     }
-    
 }
 

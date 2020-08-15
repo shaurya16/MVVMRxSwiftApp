@@ -27,7 +27,7 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate, UITableView
     override func viewDidLoad() {
         self.navigationController?.title = "Markets"
         self.navigationController?.navigationItem.title = "Markets"
-        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+//        tableView.rx.setDelegate(self).disposed(by: disposeBag)
         setupBindings()
         currencyListViewModel.fetchData()
         
@@ -38,26 +38,26 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate, UITableView
     
     func setupBindings() {
         
-        currencyListViewModel
-            .equityBalance
-            .observeOn(MainScheduler.instance)
-            .bind(to: equityBalance)
-            .disposed(by: disposeBag)
-        
-        equityBalance
-            .bind(to: equityLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        currencyListViewModel
-            .assestBalance
-            .observeOn(MainScheduler.instance)
-            .bind(to: assestBalance)
-            .disposed(by: disposeBag)
-        
-        
-        assestBalance
-            .bind(to: assestLabel.rx.text)
-            .disposed(by: disposeBag)
+//        currencyListViewModel
+//            .equityBalance
+//            .observeOn(MainScheduler.instance)
+//            .bind(to: equityBalance)
+//            .disposed(by: disposeBag)
+//
+//        equityBalance
+//            .bind(to: equityLabel.rx.text)
+//            .disposed(by: disposeBag)
+//
+//        currencyListViewModel
+//            .assestBalance
+//            .observeOn(MainScheduler.instance)
+//            .bind(to: assestBalance)
+//            .disposed(by: disposeBag)
+//
+//
+//        assestBalance
+//            .bind(to: assestLabel.rx.text)
+//            .disposed(by: disposeBag)
         
         currencyListViewModel
             .currencyList
@@ -117,7 +117,7 @@ class MarketsViewController: UIViewController, UIScrollViewDelegate, UITableView
     }
     
     @objc func updateViewModel() {
-        self.currencyListViewModel.update()
+        self.currencyListViewModel.updateData()
     }
     
     func addSubstring(pair: String, char: Character) -> String {

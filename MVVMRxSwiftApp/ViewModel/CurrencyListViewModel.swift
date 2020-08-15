@@ -13,21 +13,17 @@ import RxCocoa
 final class CurrencyListViewModel {
     
     public var showCount = 20
-    private let apiManager: APIInterface
+    private let currencyService: CurrencyServiceInterface
     private let bag = DisposeBag()
     
-    var currencyListModelArray = [CurrencyListModel]()
-    var updatedCurrencyListModelArray = [CurrencyListModel]()
-    
-    var baseCurrencyListModelArray = [CurrencyListModel]()
-    var updatedBaseCurrencyListModelArray = [CurrencyListModel]()
+    var dictionary = [String: CurrencyListModel]()
     
     public let currencyList : PublishSubject<[CurrencyListModel]> = PublishSubject()
     public let equityBalance: PublishSubject<String?> = PublishSubject()
     public let assestBalance: PublishSubject<String?> = PublishSubject()
     
-    init(apiManager: APIInterface = APIManager()) {
-        self.apiManager = apiManager
+    init(currencyService: CurrencyServiceInterface = CurrencyService()) {
+        self.currencyService = currencyService
     }
     
 }
@@ -38,92 +34,69 @@ extension CurrencyListViewModel {
     public func fetchData() {
         typealias currencyPair = Result<SupportedPairs,Error>
         
-        apiManager.requestSupportedPairs { (response: currencyPair) in
+        currencyService.requestSupportedPairs { (response: currencyPair) in
             switch response {
             case .success(let supportedPairArray):
                 self.fetchCurrencyPairRate(pairs: supportedPairArray.supportedPairs)
+                    .subscribe(onNext: { (pairDataDict) in
+                        for (key, value) in pairDataDict {
+                            print(pairDataDict)
+                            let item = CurrencyListModel(pair: key, rate: value)
+                            self.dictionary[key] = item
+                        }
+                    }, onCompleted: {
+                        print("Completed")
+                        self.updateView()
+                    }).disposed(by: self.bag)
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    func fetchCurrencyPairRate(pairs: [String]) {
-        typealias result = Result<CurrencyListModel,Error>
-        let myGroup = DispatchGroup()
-        for item in pairs {
-            myGroup.enter()
-            apiManager.requestCurrencyRate(currencyPair: item) { (response: result) in
-                switch response {
-                case .success(let currencyListModel):
-                    print("Response: \(currencyListModel)")
-                    self.currencyListModelArray.append(currencyListModel)
-                case .failure(let error):
-                    print("Error: \(error)")
-                }
-                myGroup.leave()
-            }
-        }
-        
-        myGroup.notify(queue: .main) {
-            print("Completed")
-            print(self.currencyListModelArray.count)
-            let resultCurrencyListModel = self.prepareCurrencyListModel(currencyListModel: &self.currencyListModelArray)
-            self.currencyList.onNext(resultCurrencyListModel)
-        }
-    }
-}
- 
-//MARK: -  Update Data at an interval, update ViewModel with updatedCurrencyListModelArray
-extension CurrencyListViewModel {
-    func update() {
-        typealias result = Result<Double,Error>
-        let myGroup2 = DispatchGroup()
-        self.updatedCurrencyListModelArray.removeAll()
-        for var item in currencyListModelArray {
-            myGroup2.enter()
-            apiManager.requestCurrencyRateForOnePair(currencyPair: item.pair) { (response: result) in
-                switch response {
-                case .success(let newRate):
-                    print(item.pair)
-                    print("NewRate: \(newRate)")
-                    print("BaseRate: \(item.baseRate)")
-                    print("Old%: \(item.percentage)")
-                    item.rate = newRate
-                    print("New%: \(item.percentage)")
-                    self.updatedCurrencyListModelArray.append(item)
-                case .failure(let error):
-                    print(error)
-                }
-                myGroup2.leave()
-            }
-        }
-        
-        myGroup2.notify(queue: .main) {
-            print("Completed Update")
-            print(self.updatedCurrencyListModelArray.count)
-            let resultCurrencyListModel = self.prepareCurrencyListModel(currencyListModel: &self.updatedCurrencyListModelArray)
-            self.currencyList.onNext(resultCurrencyListModel)
-            self.currencyListModelArray = self.updatedCurrencyListModelArray
-        }
+    func fetchCurrencyPairRate(pairs: [String]) -> Observable<[String: Double]> {
+        let allObservables = pairs.map { currencyService.fetchCurrencyPair(currencyPair: $0) }
+        return Observable.merge(allObservables)
     }
     
-    private func prepareCurrencyListModel(currencyListModel: inout [CurrencyListModel]) -> [CurrencyListModel] {
-        currencyListModel.sort { (lhs: CurrencyListModel, rhs: CurrencyListModel) -> Bool in
-            return lhs.pair < rhs.pair
+    public func updateData() {
+        let allObservables = dictionary.sorted { $0.key < $1.key }.map {
+            currencyService.fetchCurrencyPair(currencyPair: $0.key)
         }
-        let equityBalance = Helper.calculateEquity(array: currencyListModel)
-        self.equityBalance.onNext(equityBalance)
-        self.assestBalance.onNext(Helper.calculateAssests(totalCurrencyPairs: currencyListModel.count))
-        let slicedArray = self.sliceArray(array: currencyListModel, startIndex: 0, endIndex: self.showCount)
-        return slicedArray
+        Observable.merge(allObservables)
+            .subscribe(onNext: { (pairDataDict) in
+                for (key, value) in pairDataDict {
+                    guard var item = self.dictionary[key] else { return }
+                    print(pairDataDict)
+                    print("NewRate: \(value)")
+                    print("BaseRate: \(item.baseRate)")
+                    print("Old%: \(item.percentage)")
+                    guard let newRate = pairDataDict[key] else { return }
+                    item.rate = newRate
+                    self.dictionary.updateValue(item, forKey: key)
+                    print("New%: \(item.percentage)")
+                }
+            }, onCompleted: {
+                print("Update Completed")
+//                let equityBalance = Helper.calculateEquity(array: currencyListModel)
+//                self.equityBalance.onNext(equityBalance)
+//                self.assestBalance.onNext(Helper.calculateAssests(totalCurrencyPairs: currencyListModel.count))
+//                let slicedArray = self.sliceArray(array: currencyListModel, startIndex: 0, endIndex: self.showCount)
+//                return slicedArray
+                self.updateView()
+            }).disposed(by: self.bag)
+    }
+    
+    func updateView() {
+        let sortedValueArray = Array(self.dictionary.sorted { $0.key < $1.key }.map { $0.value })
+        self.currencyList.onNext(sortedValueArray)
     }
 }
 
 extension CurrencyListViewModel {
     func fetchNextBatch() {
-        let slicedArray = self.sliceArray(array: self.currencyListModelArray, startIndex: 0, endIndex: self.showCount)
-        self.currencyList.onNext(slicedArray)
+//        let slicedArray = self.sliceArray(array: self.currencyListModelArray, startIndex: 0, endIndex: self.showCount)
+//        self.currencyList.onNext(slicedArray)
     }
     
     func sliceArray(array: [CurrencyListModel], startIndex: Int, endIndex: Int) -> [CurrencyListModel] {
