@@ -7,7 +7,39 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--Profile-->
+        <scene sceneID="iGr-Ud-rAL">
+            <objects>
+                <viewController id="WnC-zL-6RL" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G1G-f8-Fv6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Aaf-QZ-960"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="LEO-xm-KBg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D1o-gh-Ozr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2052" y="898"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="CVU-TK-qT9">
+            <objects>
+                <viewController id="PJ7-Je-swP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hho-yc-ZHC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="vcU-bo-Zy9"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Chat" image="chat" id="o0n-Zm-Hhl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gfM-ex-c8b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1222" y="898"/>
+        </scene>
+        <!--Portfolio-->
         <scene sceneID="TPg-Xk-emy">
             <objects>
                 <viewController id="3DX-TA-fDI" sceneMemberID="viewController">
@@ -17,7 +49,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="cjw-TF-NzQ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="6fi-9u-DtM"/>
+                    <tabBarItem key="tabBarItem" title="Portfolio" image="portfolio" id="6fi-9u-DtM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7W-KL-k9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -33,7 +65,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AoT-82-OHX">
                                 <rect key="frame" x="0.0" y="197" width="414" height="616"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" red="0.079435683790000003" green="0.1123401448" blue="0.17647817730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" rowHeight="74" id="cRT-0P-k8Z" customClass="ExchangeTableViewCell" customModule="MVVMRxSwiftApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="74"/>
@@ -52,13 +84,13 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEG-rs-m3u">
                                                             <rect key="frame" x="8" y="23" width="92" height="22.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwO-wS-8K2">
                                                             <rect key="frame" x="8" y="47" width="102" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -79,8 +111,8 @@
                                                         <constraint firstAttribute="height" constant="20" id="jGh-SX-TvE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5K-09-PXa">
                                                     <rect key="frame" x="230" y="26" width="80" height="20"/>
@@ -88,7 +120,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="39R-5R-7DU"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgT-MT-B0U">
@@ -97,7 +129,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="YEd-dR-Udy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -116,6 +148,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="tgT-MT-B0U" secondAttribute="trailing" constant="-8" id="rX7-wA-WXY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.079435683790000003" green="0.1123401448" blue="0.17647817730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="buyRateLabel" destination="tgT-MT-B0U" id="avw-o6-PdT"/>
                                             <outlet property="currencySumbolLabel" destination="eEG-rs-m3u" id="hOj-rw-9Cc"/>
@@ -139,7 +172,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1f4-lA-vEz">
                                                             <rect key="frame" x="17" y="18" width="85" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.48885703089999999" green="0.58044713739999998" blue="0.76865077020000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -157,7 +190,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="oMo-gj-swT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.48885703089999999" green="0.58044713739999998" blue="0.76865077020000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRc-c5-9JB">
@@ -166,7 +199,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="I9B-vG-xff"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.48885703089999999" green="0.58044713739999998" blue="0.76865077020000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIM-ru-9Re">
@@ -175,10 +208,11 @@
                                                         <constraint firstAttribute="height" constant="20" id="MHP-Sq-H5v"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.48885703089999999" green="0.58044713739999998" blue="0.76865077020000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.079435683790000003" green="0.1123401448" blue="0.17647817730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="MRc-c5-9JB" firstAttribute="leading" secondItem="eQ2-jh-ruk" secondAttribute="trailing" constant="12" id="06r-rY-IzF"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="oIM-ru-9Re" secondAttribute="trailing" constant="-8" id="BD6-VM-p5c"/>
@@ -193,6 +227,7 @@
                                                 <constraint firstItem="MRc-c5-9JB" firstAttribute="top" secondItem="QxK-LQ-5hE" secondAttribute="topMargin" constant="6" id="x94-bk-r0D"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.079435683790000003" green="0.1123401448" blue="0.17647817730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="buyRateLabel" destination="oIM-ru-9Re" id="fbI-IN-wLk"/>
                                             <outlet property="currencySumbolLabel" destination="1f4-lA-vEz" id="Nwt-wW-w9i"/>
@@ -279,7 +314,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.079435683790000003" green="0.1123401448" blue="0.17647817730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="AoT-82-OHX" firstAttribute="leading" secondItem="Hbv-TM-fqZ" secondAttribute="leading" id="56o-4J-XQR"/>
                             <constraint firstItem="Hbv-TM-fqZ" firstAttribute="trailing" secondItem="sCT-Cb-YXU" secondAttribute="trailing" constant="15" id="5rN-LQ-jw2"/>
@@ -309,26 +344,34 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1jB-Us-jKt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1225303188" green="0.15946367380000001" blue="0.22353741529999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.1225303188" green="0.15946367380000001" blue="0.22353741529999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="LPw-hh-E88" kind="relationship" relationship="viewControllers" id="Yfi-1M-Gpp"/>
                         <segue destination="3DX-TA-fDI" kind="relationship" relationship="viewControllers" id="UC3-qN-uvc"/>
+                        <segue destination="PJ7-Je-swP" kind="relationship" relationship="viewControllers" id="wXD-tf-Sta"/>
+                        <segue destination="WnC-zL-6RL" kind="relationship" relationship="viewControllers" id="Gdd-Ey-X7T"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DuS-vZ-dkZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1425" y="-28"/>
         </scene>
-        <!--Item 1-->
+        <!--Markets-->
         <scene sceneID="5EO-ap-abs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LPw-hh-E88" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="K7x-sH-Sl5"/>
+                    <tabBarItem key="tabBarItem" title="Markets" image="market" id="K7x-sH-Sl5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wxH-Qw-x7M">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.2598503828" green="0.2197135985" blue="0.38040852549999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.2598503828" green="0.2197135985" blue="0.38040852549999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -340,4 +383,10 @@
             <point key="canvasLocation" x="-507.24637681159425" y="-352.23214285714283"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chat" width="21" height="19"/>
+        <image name="market" width="20" height="20"/>
+        <image name="portfolio" width="21" height="19"/>
+        <image name="profile" width="22" height="22"/>
+    </resources>
 </document>

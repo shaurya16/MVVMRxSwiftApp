@@ -23,8 +23,8 @@ class MarketsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Markets"
-        self.navigationController?.navigationItem.title = "Markets"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .search, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = .white
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         setupBindings()
         viewModel.input.validate.onNext(())
@@ -55,7 +55,7 @@ class MarketsViewController: UIViewController {
                     cell.sellRateLabel.text = String(format: "%.4f", item.sellRate)
                     if (item.percentage == 0) {
                         cell.trendImageView.image = nil
-                        cell.percentageLabel.textColor = .black
+                        cell.percentageLabel.textColor = .white
                     } else if (item.percentage > 0){
                         cell.trendImageView.image = UIImage(named: "trendPositive")
                         cell.percentageLabel.textColor = .green
