@@ -1,4 +1,4 @@
-# README
+# MVVMRxSwiftApp
 
 MVVMRxSwiftApp is an sample iOS App written in RxSwift using the MVVM architecture. 
 This App fetches exchange rates from a web API, updates the data continously giving the user an info about Exchange Rate appreciation/depreciation and Equity value.  
@@ -14,10 +14,10 @@ This App fetches exchange rates from a web API, updates the data continously giv
    ```
    
 2. Make sure you have Cocoa Pods installed. Use the command to install Pods:
+    ```
+     pod install
+    ```
 
-```
- pod install
-```
 3. Open `MVVMRxSwiftApp.xcworkspace` in Xcode.
 
 
@@ -39,4 +39,5 @@ Points to be noted:
 ## References
 
 [RxSwift + MVVM: how to feed ViewModels](https://medium.com/blablacar-tech/rxswift-mvvm-66827b8b3f10)
+
 [Kickstarter’s open source iOS App](https://github.com/kickstarter/ios-oss)
