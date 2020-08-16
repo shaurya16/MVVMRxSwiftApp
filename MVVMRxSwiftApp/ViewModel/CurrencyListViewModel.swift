@@ -25,8 +25,6 @@ final class CurrencyListViewModel: ViewModelType {
     let output: Output
 
     struct Input {
-        let currencyService: CurrencyServiceInterface
-        
     }
     private var noOfRowToBeShown: Int = 20
     
@@ -40,6 +38,8 @@ final class CurrencyListViewModel: ViewModelType {
     
     private let bag = DisposeBag()
     
+    let currencyService: CurrencyServiceInterface
+    
     var dictionary = [String: CurrencyListModel]()
     
     private let currencyList = PublishSubject<[CurrencyListModel]>()
@@ -48,16 +48,20 @@ final class CurrencyListViewModel: ViewModelType {
     private let errorSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     private let reachedBottomSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     
-    init() {
+    init(currencyService: CurrencyServiceInterface = CurrencyService()) {
+        
+        self.currencyService = currencyService
         
         let error = errorSubject.asObserver()
         let equity = equitySubject.asDriver(onErrorJustReturn: "N/A")
         let asset = assetSubject.asDriver(onErrorJustReturn: "N/A")
-        self.input = Input(currencyService: CurrencyService())
+        
+        self.input = Input()
         self.output = Output(currencyList: currencyList,
                              equityBalance: equity,
                              assetBalance: asset,
                              error: error)
+        
         
         fetchData()
         Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.updateData), userInfo: nil, repeats: true)
@@ -72,7 +76,7 @@ extension CurrencyListViewModel {
     private func fetchData() {
         typealias currencyPair = Result<SupportedPairs,Error>
         
-        input.currencyService.requestSupportedPairs().subscribe(onNext: { (supportedPairs) in
+        currencyService.requestSupportedPairs().subscribe(onNext: { (supportedPairs) in
             self.fetchCurrencyPairRate(pairs: supportedPairs)
         }, onError: { (error) in
             self.errorSubject.onNext(true)
@@ -80,7 +84,7 @@ extension CurrencyListViewModel {
     }
     
     private func fetchCurrencyPairRate(pairs: [String]) {
-        let allObservables = pairs.map { input.currencyService.fetchCurrencyPair(currencyPair: $0) }
+        let allObservables = pairs.map { currencyService.fetchCurrencyPair(currencyPair: $0) }
         Observable.merge(allObservables)
             .subscribe(onNext: { (pairDataDict) in
             for (key, value) in pairDataDict {
@@ -99,7 +103,7 @@ extension CurrencyListViewModel {
             fetchData()
         } else {
             let allObservables = dictionary.sorted { $0.key < $1.key }.map {
-                        input.currencyService.fetchCurrencyPair(currencyPair: $0.key).share()
+                        currencyService.fetchCurrencyPair(currencyPair: $0.key).share()
                     }
                 Observable.merge(allObservables)
                     .subscribe(onNext: { (pairDataDict) in
