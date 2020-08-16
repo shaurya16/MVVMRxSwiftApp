@@ -7,7 +7,7 @@ This App fetches exchange rates from a web API, updates the data continously giv
 
 ## Screenshot
 
-![Screenshot](Screenshots/1.png?raw=true "Screenshot iPhone 11")
+<img src="./Screenshots/1.png" width="35%">
 
 ## Getting Started
 
