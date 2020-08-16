@@ -33,13 +33,13 @@
 		D9501F4C24E5CB5B00A6B630 /* USDCHF.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3424E5C08B00A6B630 /* USDCHF.json */; };
 		D9501F4D24E5CB5E00A6B630 /* USDHKD.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3624E5C09B00A6B630 /* USDHKD.json */; };
 		D9501F4E24E5CB6100A6B630 /* USDINR.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3824E5C0B100A6B630 /* USDINR.json */; };
-		D9501F4F24E5CB6500A6B630 /* USDEUR-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3B24E5C0FF00A6B630 /* USDEUR-2.json */; };
-		D9501F5024E5CB6800A6B630 /* USDJPY-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3D24E5C11100A6B630 /* USDJPY-2.json */; };
 		D9501F5124E5CB6B00A6B630 /* USDGBP-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3F24E5C11D00A6B630 /* USDGBP-2.json */; };
 		D9501F5224E5CB6E00A6B630 /* USDCAD-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4124E5C12B00A6B630 /* USDCAD-2.json */; };
 		D9501F5324E5CB7100A6B630 /* USDCHF-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4324E5C13800A6B630 /* USDCHF-2.json */; };
 		D9501F5424E5CB7400A6B630 /* USDHKD-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4524E5C14600A6B630 /* USDHKD-2.json */; };
 		D9501F5524E5CB7700A6B630 /* USDINR-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4724E5C15200A6B630 /* USDINR-2.json */; };
+		D990139724E9BD32005A80EC /* USDJPY-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3D24E5C11100A6B630 /* USDJPY-2.json */; };
+		D990139824E9BD3B005A80EC /* USDEUR-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F3B24E5C0FF00A6B630 /* USDEUR-2.json */; };
 		D9919A5D24E92F33006D78F0 /* ExchangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1524E188BD00A6B630 /* ExchangeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -408,13 +408,13 @@
 				D9501F5324E5CB7100A6B630 /* USDCHF-2.json in Resources */,
 				D9501EEC24E17E0B00A6B630 /* Assets.xcassets in Resources */,
 				D9501F5524E5CB7700A6B630 /* USDINR-2.json in Resources */,
+				D990139824E9BD3B005A80EC /* USDEUR-2.json in Resources */,
 				D9501F4A24E5CB5200A6B630 /* USDJPY.json in Resources */,
 				D9501F5124E5CB6B00A6B630 /* USDGBP-2.json in Resources */,
+				D990139724E9BD32005A80EC /* USDJPY-2.json in Resources */,
 				D9501F5224E5CB6E00A6B630 /* USDCAD-2.json in Resources */,
 				D9501F5424E5CB7400A6B630 /* USDHKD-2.json in Resources */,
 				D9501F4E24E5CB6100A6B630 /* USDINR.json in Resources */,
-				D9501F4F24E5CB6500A6B630 /* USDEUR-2.json in Resources */,
-				D9501F5024E5CB6800A6B630 /* USDJPY-2.json in Resources */,
 				D9501F4C24E5CB5B00A6B630 /* USDCHF.json in Resources */,
 				D9501F1B24E1D31E00A6B630 /* CurrencyPairsMock.json in Resources */,
 				D9501F4924E5CB4E00A6B630 /* USDEUR.json in Resources */,

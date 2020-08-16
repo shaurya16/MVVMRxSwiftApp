@@ -16,5 +16,7 @@ target 'MVVMRxSwiftAppTests' do
   inherit! :search_paths
 
   pod 'RxTest'
-
+  pod 'RxBlocking'
+  pod 'RxCocoa'
+  pod 'RxRelay'
 end
