@@ -33,12 +33,6 @@ class MockCurrencyService: CurrencyServiceInterface {
     
     func fetchCurrencyPair(currencyPair: String) -> Observable<[String : Double]> {
         return Observable.create { observer -> Disposable in
-            var file: String = ""
-            if Bool.random() {
-                file = "\(currencyPair)"
-            } else {
-                file = "\(currencyPair)-2"
-            }
             guard let path = Bundle.main.path(forResource: "\(file)", ofType: "json") else {
                 print("Error: Cannot find file")
                 return Disposables.create {}

@@ -22,6 +22,7 @@ class MarketsViewController: UIViewController {
     var viewModel = CurrencyListViewModel()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.navigationController?.title = "Markets"
         self.navigationController?.navigationItem.title = "Markets"
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
