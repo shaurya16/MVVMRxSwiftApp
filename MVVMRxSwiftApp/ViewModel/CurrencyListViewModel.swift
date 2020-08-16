@@ -25,6 +25,7 @@ final class CurrencyListViewModel: ViewModelType {
     let output: Output
 
     struct Input {
+        let validate: AnyObserver<Void>
     }
     private var noOfRowToBeShown: Int = 20
     
@@ -48,6 +49,9 @@ final class CurrencyListViewModel: ViewModelType {
     private let errorSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     private let reachedBottomSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     
+    private let validateSubject = PublishSubject<Void>()
+
+    
     init(currencyService: CurrencyServiceInterface = CurrencyService()) {
         
         self.currencyService = currencyService
@@ -56,16 +60,17 @@ final class CurrencyListViewModel: ViewModelType {
         let equity = equitySubject.asDriver(onErrorJustReturn: "N/A")
         let asset = assetSubject.asDriver(onErrorJustReturn: "N/A")
         
-        self.input = Input()
+        self.input = Input(validate: validateSubject.asObserver())
         self.output = Output(currencyList: currencyList,
                              equityBalance: equity,
                              assetBalance: asset,
                              error: error)
         
-        
-        fetchData()
-        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.updateData), userInfo: nil, repeats: true)
-        fetchNextBatch()
+        validateSubject.bind { () in
+            self.fetchData()
+            Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.updateData), userInfo: nil, repeats: true)
+            self.fetchNextBatch()
+        }.disposed(by: bag)
     }
     
 }

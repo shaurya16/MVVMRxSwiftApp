@@ -26,6 +26,7 @@ class MarketsViewController: UIViewController {
         self.navigationController?.navigationItem.title = "Markets"
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         setupBindings()
+        viewModel.input.validate.onNext(())
     }
     
     

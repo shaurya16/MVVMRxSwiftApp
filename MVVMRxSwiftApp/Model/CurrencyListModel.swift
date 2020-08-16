@@ -19,7 +19,7 @@ struct Constants {
     static var startingBalance = 10000
 }
 
-struct CurrencyListModel {
+struct CurrencyListModel: Equatable {
     var pair: String
     var rate: Double = 0.0 {
         didSet {
