@@ -133,10 +133,10 @@ extension CurrencyListViewModel {
     
     private func updateView() {
         let sortedValueArray = Array(self.dictionary.sorted { $0.key < $1.key }.map { $0.value })
-        let equityBalance = Helper.calculateEquity(array: sortedValueArray)
+        let equityBalance = Utils.calculateEquity(array: sortedValueArray)
         self.equitySubject.onNext(equityBalance)
-        self.assetSubject.onNext(Helper.calculateAssests(totalCurrencyPairs: sortedValueArray.count))
-        let slicedArray = Helper.sliceArray(array: sortedValueArray, startIndex: 0, endIndex: noOfRowToBeShown)
+        self.assetSubject.onNext(Utils.calculateAssests(totalCurrencyPairs: sortedValueArray.count))
+        let slicedArray = Utils.sliceArray(array: sortedValueArray, startIndex: 0, endIndex: noOfRowToBeShown)
         self.currencyList.onNext(slicedArray)
     }
 }

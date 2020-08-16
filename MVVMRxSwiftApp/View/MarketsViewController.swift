@@ -63,7 +63,7 @@ class MarketsViewController: UIViewController {
                         cell.trendImageView.image = UIImage(named: "trendNegative")
                         cell.percentageLabel.textColor = .red
                     }
-                    let pairName = Helper.addSubstring(pair: item.pair, char: "/")
+                    let pairName = Utils.addSubstring(pair: item.pair, char: "/")
                     cell.currencySumbolLabel.text = pairName
                     cell.subTitleLabel.text = "\(pairName) : Forex"
         }.disposed(by: disposeBag)
