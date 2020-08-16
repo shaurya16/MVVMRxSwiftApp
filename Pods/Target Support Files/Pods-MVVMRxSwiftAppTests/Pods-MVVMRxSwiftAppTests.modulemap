@@ -1,4 +1,4 @@
-module Pods_MVVMRxSwiftAppTests {
+framework module Pods_MVVMRxSwiftAppTests {
   umbrella header "Pods-MVVMRxSwiftAppTests-umbrella.h"
 
   export *

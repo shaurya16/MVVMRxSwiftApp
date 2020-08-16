@@ -1,4 +1,4 @@
-module RxTest {
+framework module RxTest {
   umbrella header "RxTest-umbrella.h"
 
   export *

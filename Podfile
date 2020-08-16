@@ -12,8 +12,9 @@ target 'MVVMRxSwiftApp' do
 end
 
 target 'MVVMRxSwiftAppTests' do
-
+  use_frameworks!
   inherit! :search_paths
+
   pod 'RxTest'
 
 end
