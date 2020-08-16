@@ -5,6 +5,9 @@ This App fetches exchange rates from a web API, updates the data continously giv
 
 [![Language](https://img.shields.io/badge/language-Swift%205.0-orange.svg)](https://swift.org)
 
+## Screenshot
+
+![Screenshot](Screenshots/1.png?raw=true "Screenshot iPhone 11")
 
 ## Getting Started
 
