@@ -88,4 +88,19 @@ struct Helper {
     static func calculateAssests(totalCurrencyPairs: Int) -> String {
         return String(Constants.startingBalance*totalCurrencyPairs)
     }
+    
+    static func addSubstring(pair: String, char: Character) -> String {
+        var updatedPair = pair
+        updatedPair.insert(char, at: pair.index(pair.startIndex, offsetBy: 3))
+        return updatedPair
+    }
+    
+    static func sliceArray(array: [CurrencyListModel], startIndex: Int, endIndex: Int) -> [CurrencyListModel] {
+        if endIndex < array.count {
+            return Array(array[startIndex...endIndex])
+        } else {
+            let length = array.count - 1
+            return Array(array[startIndex...length])
+        }
+    }
 }

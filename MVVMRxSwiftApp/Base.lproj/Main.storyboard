@@ -50,7 +50,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEG-rs-m3u">
-                                                            <rect key="frame" x="8" y="23" width="92" height="23"/>
+                                                            <rect key="frame" x="8" y="23" width="92" height="22.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -293,7 +293,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Markets" id="IqJ-YC-eaZ"/>
                     <connections>
-                        <outlet property="assestLabel" destination="baQ-Q4-A7b" id="c9s-TG-QS7"/>
+                        <outlet property="assetLabel" destination="baQ-Q4-A7b" id="c9s-TG-QS7"/>
                         <outlet property="equityLabel" destination="Hkp-61-jK6" id="OfS-DO-esA"/>
                         <outlet property="tableView" destination="AoT-82-OHX" id="1H9-J1-fHr"/>
                     </connections>

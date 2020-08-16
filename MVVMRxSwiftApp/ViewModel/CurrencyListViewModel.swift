@@ -10,102 +10,143 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class CurrencyListViewModel {
+
+protocol ViewModelType {
+    associatedtype Input
+    associatedtype Output
+
+    var input: Input { get }
+    var output: Output { get }
+}
+
+final class CurrencyListViewModel: ViewModelType {
     
-    public var showCount = 20
-    private let currencyService: CurrencyServiceInterface
+    let input: Input
+    let output: Output
+
+    struct Input {
+        let currencyService: CurrencyServiceInterface
+        
+    }
+    private var noOfRowToBeShown: Int = 20
+    
+    struct Output {
+        let currencyList: PublishSubject<[CurrencyListModel]>
+        let equityBalance: Driver<String>
+        let assetBalance: Driver<String>
+        let error: Observable<Bool>
+        let reachedBottom = PublishSubject<Bool>()
+    }
+    
     private let bag = DisposeBag()
     
     var dictionary = [String: CurrencyListModel]()
     
-    public let currencyList : PublishSubject<[CurrencyListModel]> = PublishSubject()
-    public let equityBalance: PublishSubject<String?> = PublishSubject()
-    public let assestBalance: PublishSubject<String?> = PublishSubject()
+    private let currencyList = PublishSubject<[CurrencyListModel]>()
+    private let equitySubject = ReplaySubject<String>.create(bufferSize: 1)
+    private let assetSubject = ReplaySubject<String>.create(bufferSize: 1)
+    private let errorSubject = ReplaySubject<Bool>.create(bufferSize: 1)
+    private let reachedBottomSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     
-    init(currencyService: CurrencyServiceInterface = CurrencyService()) {
-        self.currencyService = currencyService
+    init() {
+        
+        let error = errorSubject.asObserver()
+        let equity = equitySubject.asDriver(onErrorJustReturn: "N/A")
+        let asset = assetSubject.asDriver(onErrorJustReturn: "N/A")
+        self.input = Input(currencyService: CurrencyService())
+        self.output = Output(currencyList: currencyList,
+                             equityBalance: equity,
+                             assetBalance: asset,
+                             error: error)
+        
+        fetchData()
+        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.updateData), userInfo: nil, repeats: true)
+        fetchNextBatch()
     }
     
 }
 
-//MARK: -  Fetch Data when the App starts, update ViewModel with currencyListModelArray
+//MARK: -  Fetch Data when ViewModel is initialized, update currencyList
 extension CurrencyListViewModel {
     
-    public func fetchData() {
+    private func fetchData() {
         typealias currencyPair = Result<SupportedPairs,Error>
         
-        currencyService.requestSupportedPairs { (response: currencyPair) in
-            switch response {
-            case .success(let supportedPairArray):
-                self.fetchCurrencyPairRate(pairs: supportedPairArray.supportedPairs)
-                    .subscribe(onNext: { (pairDataDict) in
-                        for (key, value) in pairDataDict {
-                            print(pairDataDict)
-                            let item = CurrencyListModel(pair: key, rate: value)
-                            self.dictionary[key] = item
-                        }
-                    }, onCompleted: {
-                        print("Completed")
-                        self.updateView()
-                    }).disposed(by: self.bag)
-            case .failure(let error):
-                print(error)
-            }
-        }
+        input.currencyService.requestSupportedPairs().subscribe(onNext: { (supportedPairs) in
+            self.fetchCurrencyPairRate(pairs: supportedPairs)
+        }, onError: { (error) in
+            self.errorSubject.onNext(true)
+        }).disposed(by: self.bag)
     }
     
-    func fetchCurrencyPairRate(pairs: [String]) -> Observable<[String: Double]> {
-        let allObservables = pairs.map { currencyService.fetchCurrencyPair(currencyPair: $0) }
-        return Observable.merge(allObservables)
-    }
-    
-    public func updateData() {
-        let allObservables = dictionary.sorted { $0.key < $1.key }.map {
-            currencyService.fetchCurrencyPair(currencyPair: $0.key)
-        }
+    private func fetchCurrencyPairRate(pairs: [String]) {
+        let allObservables = pairs.map { input.currencyService.fetchCurrencyPair(currencyPair: $0) }
         Observable.merge(allObservables)
             .subscribe(onNext: { (pairDataDict) in
-                for (key, value) in pairDataDict {
-                    guard var item = self.dictionary[key] else { return }
-                    print(pairDataDict)
-                    print("NewRate: \(value)")
-                    print("BaseRate: \(item.baseRate)")
-                    print("Old%: \(item.percentage)")
-                    guard let newRate = pairDataDict[key] else { return }
-                    item.rate = newRate
-                    self.dictionary.updateValue(item, forKey: key)
-                    print("New%: \(item.percentage)")
-                }
-            }, onCompleted: {
-                print("Update Completed")
-//                let equityBalance = Helper.calculateEquity(array: currencyListModel)
-//                self.equityBalance.onNext(equityBalance)
-//                self.assestBalance.onNext(Helper.calculateAssests(totalCurrencyPairs: currencyListModel.count))
-//                let slicedArray = self.sliceArray(array: currencyListModel, startIndex: 0, endIndex: self.showCount)
-//                return slicedArray
-                self.updateView()
-            }).disposed(by: self.bag)
+            for (key, value) in pairDataDict {
+                print(pairDataDict)
+                let item = CurrencyListModel(pair: key, rate: value)
+                self.dictionary[key] = item
+            }
+        }, onCompleted: {
+            print("Completed")
+            self.updateView()
+        }).disposed(by: self.bag)
     }
     
-    func updateView() {
+    @objc private func updateData() {
+        if dictionary.isEmpty {
+            fetchData()
+        } else {
+            let allObservables = dictionary.sorted { $0.key < $1.key }.map {
+                        input.currencyService.fetchCurrencyPair(currencyPair: $0.key).share()
+                    }
+                Observable.merge(allObservables)
+                    .subscribe(onNext: { (pairDataDict) in
+                        for (key, value) in pairDataDict {
+                            guard var item = self.dictionary[key] else { return }
+                            print(pairDataDict)
+                            print("NewRate: \(value)")
+                            print("BaseRate: \(item.baseRate)")
+                            print("Old%: \(item.percentage)")
+                            guard let newRate = pairDataDict[key] else { return }
+                            item.rate = newRate
+                            self.dictionary.updateValue(item, forKey: key)
+                            print("New%: \(item.percentage)")
+                        }
+                    }, onCompleted: {
+                        print("Update Completed")
+                        self.updateView()
+                    }).disposed(by: self.bag)
+        }
+        
+    }
+    
+    private func updateView() {
         let sortedValueArray = Array(self.dictionary.sorted { $0.key < $1.key }.map { $0.value })
-        self.currencyList.onNext(sortedValueArray)
+        let equityBalance = Helper.calculateEquity(array: sortedValueArray)
+        self.equitySubject.onNext(equityBalance)
+        self.assetSubject.onNext(Helper.calculateAssests(totalCurrencyPairs: sortedValueArray.count))
+        let slicedArray = Helper.sliceArray(array: sortedValueArray, startIndex: 0, endIndex: noOfRowToBeShown)
+        self.currencyList.onNext(slicedArray)
     }
 }
 
 extension CurrencyListViewModel {
     func fetchNextBatch() {
-//        let slicedArray = self.sliceArray(array: self.currencyListModelArray, startIndex: 0, endIndex: self.showCount)
-//        self.currencyList.onNext(slicedArray)
-    }
-    
-    func sliceArray(array: [CurrencyListModel], startIndex: Int, endIndex: Int) -> [CurrencyListModel] {
-        if endIndex < array.count {
-            return Array(array[startIndex...endIndex])
-        } else {
-            let length = array.count - 1
-            return Array(array[startIndex...length])
-        }
+        self.output.reachedBottom.onNext(false)
+        self.output.reachedBottom.observeOn(MainScheduler.instance).subscribe(onNext: { value in
+            if (self.noOfRowToBeShown < self.dictionary.count - 1) {
+                self.noOfRowToBeShown += 20
+            } else {
+                self.noOfRowToBeShown = self.dictionary.count - 1
+            }
+            print(value)
+            print(self.noOfRowToBeShown)
+            if (value) {
+                self.updateView()
+            }
+        }).disposed(by: bag)
     }
 }
 

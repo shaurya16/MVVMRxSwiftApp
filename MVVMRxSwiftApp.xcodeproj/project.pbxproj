@@ -18,7 +18,6 @@
 		D9501EFA24E17E0B00A6B630 /* MVVMRxSwiftAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501EF924E17E0B00A6B630 /* MVVMRxSwiftAppTests.swift */; };
 		D9501F0524E17E0B00A6B630 /* MVVMRxSwiftAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F0424E17E0B00A6B630 /* MVVMRxSwiftAppUITests.swift */; };
 		D9501F1424E181AA00A6B630 /* MarketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1324E181AA00A6B630 /* MarketsViewController.swift */; };
-		D9501F1624E188BD00A6B630 /* ExchangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1524E188BD00A6B630 /* ExchangeTableViewCell.swift */; };
 		D9501F1924E1BB3F00A6B630 /* CurrencyPairsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1824E1BB3F00A6B630 /* CurrencyPairsModel.swift */; };
 		D9501F1B24E1D31E00A6B630 /* CurrencyPairsMock.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F1A24E1D31E00A6B630 /* CurrencyPairsMock.json */; };
 		D9501F1E24E1D34F00A6B630 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1D24E1D34F00A6B630 /* CurrencyService.swift */; };
@@ -41,6 +40,7 @@
 		D9501F5324E5CB7100A6B630 /* USDCHF-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4324E5C13800A6B630 /* USDCHF-2.json */; };
 		D9501F5424E5CB7400A6B630 /* USDHKD-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4524E5C14600A6B630 /* USDHKD-2.json */; };
 		D9501F5524E5CB7700A6B630 /* USDINR-2.json in Resources */ = {isa = PBXBuildFile; fileRef = D9501F4724E5C15200A6B630 /* USDINR-2.json */; };
+		D9919A5D24E92F33006D78F0 /* ExchangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9501F1524E188BD00A6B630 /* ExchangeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,8 +207,7 @@
 			children = (
 				D9501EE624E17E0700A6B630 /* TabBarViewController.swift */,
 				D9501F1324E181AA00A6B630 /* MarketsViewController.swift */,
-				D9501F1524E188BD00A6B630 /* ExchangeTableViewCell.swift */,
-				D9501F2824E55E1100A6B630 /* HeaderTableViewCell.swift */,
+				D9919A5C24E92C97006D78F0 /* TableViewCells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -275,6 +274,15 @@
 				D9501F4724E5C15200A6B630 /* USDINR-2.json */,
 			);
 			path = SecondRequest;
+			sourceTree = "<group>";
+		};
+		D9919A5C24E92C97006D78F0 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D9501F1524E188BD00A6B630 /* ExchangeTableViewCell.swift */,
+				D9501F2824E55E1100A6B630 /* HeaderTableViewCell.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		F5E78C611650CF4A00E890E3 /* Pods */ = {
@@ -501,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9919A5D24E92F33006D78F0 /* ExchangeTableViewCell.swift in Sources */,
 				D9501F1924E1BB3F00A6B630 /* CurrencyPairsModel.swift in Sources */,
 				D9501F2024E1D8BD00A6B630 /* CurrencyListViewModel.swift in Sources */,
 				D9501F2724E32CE200A6B630 /* APIManager.swift in Sources */,
@@ -510,7 +519,6 @@
 				D9501EE324E17E0700A6B630 /* AppDelegate.swift in Sources */,
 				D9501F1E24E1D34F00A6B630 /* CurrencyService.swift in Sources */,
 				D9501F2524E1E83200A6B630 /* CurrencyListModel.swift in Sources */,
-				D9501F1624E188BD00A6B630 /* ExchangeTableViewCell.swift in Sources */,
 				D9501EE524E17E0700A6B630 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

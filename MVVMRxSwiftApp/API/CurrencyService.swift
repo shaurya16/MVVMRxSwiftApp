@@ -14,36 +14,50 @@ struct ServiceURL {
 }
 
 protocol CurrencyServiceInterface {
-    func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void)
+    func requestSupportedPairs() -> Observable<[String]>
     func fetchCurrencyPair(currencyPair: String) -> Observable<[String: Double]>
 }
 
 class CurrencyService: CurrencyServiceInterface {
-    public func requestSupportedPairs(completion: @escaping (Result<SupportedPairs,Error>)->Void) {
-        guard let urlRequest = URL(string: ServiceURL.baseURL) else {
-            return
-        }
-        let request = URLRequest(url: urlRequest)
-        let _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-                do {
-                    let response = try JSONDecoder().decode(SupportedPairs.self, from: data)
-                    print(response)
-                    completion(.success(response))
-                    
-                } catch {
-                    print(error)
-                    completion(.failure(error))
+    public func requestSupportedPairs() -> Observable<[String]> {
+        return Observable.create { observer -> Disposable in
+            guard let url = URL(string: ServiceURL.baseURL) else {
+                observer.onError(NSError(domain: "Error creating URL, Please check the URL again!", code: -1, userInfo: nil))
+                return Disposables.create {}
+            }
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                
+                switch response {
+                case .none:
+                    guard let error = error else { return }
+                    observer.onError(error)
+                case .some(_):
+                    guard let data = data else {
+                        observer.onError(NSError(domain: "Data is nill", code: -1, userInfo: nil))
+                        return
+                    }
+                    do {
+                        let pairs = try JSONDecoder().decode(SupportedPairs.self, from: data)
+                        let supportedPairs = pairs.supportedPairs
+                        
+                        observer.onNext(supportedPairs)
+                        observer.onCompleted()
+                    } catch {
+                        observer.onError(error)
+                    }
                 }
             }
-        
-        }.resume()
+            task.resume()
+            return Disposables.create {
+                task.cancel()
+            }
+        }
     }
     
     func fetchCurrencyPair(currencyPair: String) -> Observable<[String: Double]>{
         return Observable.create { observer -> Disposable in
             guard let url = URL(string: "\(ServiceURL.baseURL)?pairs=\(currencyPair)") else {
-                observer.onError(NSError(domain: "", code: -1, userInfo: nil))
+                observer.onError(NSError(domain: "Error creating URL, Please check the URL again!", code: -1, userInfo: nil))
                 return Disposables.create {}
             }
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -55,7 +69,7 @@ class CurrencyService: CurrencyServiceInterface {
                     let pairs = try JSONDecoder().decode(Pairs.self, from: data)
 //                    print(pairs)
                     guard let pairRate = pairs.rates[currencyPair] else {
-                        observer.onError(NSError(domain: "No rate provided", code: -1, userInfo: nil))
+                        print("Cannot find rates for the pair \(currencyPair)")
                         return
                     }
                     let pairData = [currencyPair: pairRate.rate]
