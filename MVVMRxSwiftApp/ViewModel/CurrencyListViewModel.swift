@@ -11,6 +11,11 @@ import RxSwift
 import RxCocoa
 
 
+struct Pagination {
+    static let sizeOfPagesFirstTime = 20
+    static let sizeOfPagesOnRequest = 20
+}
+
 protocol ViewModelType {
     associatedtype Input
     associatedtype Output
@@ -27,7 +32,7 @@ final class CurrencyListViewModel: ViewModelType {
     struct Input {
         let validate: AnyObserver<Void>
     }
-    private var noOfRowToBeShown: Int = 20
+    private var noOfRowToBeShown: Int = Pagination.sizeOfPagesFirstTime
     
     struct Output {
         let currencyList: PublishSubject<[CurrencyListModel]>
@@ -39,9 +44,9 @@ final class CurrencyListViewModel: ViewModelType {
     
     private let bag = DisposeBag()
     
-    let currencyService: CurrencyServiceInterface
+    private let currencyService: CurrencyServiceInterface
     
-    var dictionary = [String: CurrencyListModel]()
+    private var dictionary = [String: CurrencyListModel]()
     
     private let currencyList = PublishSubject<[CurrencyListModel]>()
     private let equitySubject = ReplaySubject<String>.create(bufferSize: 1)
@@ -75,7 +80,7 @@ final class CurrencyListViewModel: ViewModelType {
     
 }
 
-//MARK: -  Fetch Data when ViewModel is initialized, update currencyList
+//MARK: -  Fetch Data when ViewModel input is validated, update dictionary
 extension CurrencyListViewModel {
     
     private func fetchData() {
@@ -108,25 +113,25 @@ extension CurrencyListViewModel {
             fetchData()
         } else {
             let allObservables = dictionary.sorted { $0.key < $1.key }.map {
-                        currencyService.fetchCurrencyPair(currencyPair: $0.key).share()
+                currencyService.fetchCurrencyPair(currencyPair: $0.key).share()
+            }
+            Observable.merge(allObservables)
+                .subscribe(onNext: { (pairDataDict) in
+                    for (key, value) in pairDataDict {
+                        guard var item = self.dictionary[key] else { return }
+                        print(pairDataDict)
+                        print("NewRate: \(value)")
+                        print("BaseRate: \(item.baseRate)")
+                        print("Old%: \(item.percentage)")
+                        guard let newRate = pairDataDict[key] else { return }
+                        item.rate = newRate
+                        self.dictionary.updateValue(item, forKey: key)
+                        print("New%: \(item.percentage)")
                     }
-                Observable.merge(allObservables)
-                    .subscribe(onNext: { (pairDataDict) in
-                        for (key, value) in pairDataDict {
-                            guard var item = self.dictionary[key] else { return }
-                            print(pairDataDict)
-                            print("NewRate: \(value)")
-                            print("BaseRate: \(item.baseRate)")
-                            print("Old%: \(item.percentage)")
-                            guard let newRate = pairDataDict[key] else { return }
-                            item.rate = newRate
-                            self.dictionary.updateValue(item, forKey: key)
-                            print("New%: \(item.percentage)")
-                        }
-                    }, onCompleted: {
-                        print("Update Completed")
-                        self.updateView()
-                    }).disposed(by: self.bag)
+                }, onCompleted: {
+                    print("Update Completed")
+                    self.updateView()
+                }).disposed(by: self.bag)
         }
         
     }
@@ -141,12 +146,13 @@ extension CurrencyListViewModel {
     }
 }
 
+//MARK: -  Feed More data when user scrolls to bottom of the tableView
 extension CurrencyListViewModel {
-    func fetchNextBatch() {
+    private func fetchNextBatch() {
         self.output.reachedBottom.onNext(false)
         self.output.reachedBottom.observeOn(MainScheduler.instance).subscribe(onNext: { value in
             if (self.noOfRowToBeShown < self.dictionary.count - 1) {
-                self.noOfRowToBeShown += 20
+                self.noOfRowToBeShown += Pagination.sizeOfPagesOnRequest
             } else {
                 self.noOfRowToBeShown = self.dictionary.count - 1
             }

@@ -25,26 +25,17 @@ class MarketsViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .search, target: self, action: nil)
         self.navigationItem.rightBarButtonItem?.tintColor = .white
-        tableView.rx.setDelegate(self).disposed(by: disposeBag)
-        setupBindings()
+        
         viewModel.input.validate.onNext(())
+        
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        
+        setupTableViewBindings()
+        setupLabelViewBindings()
+        setupErrorAlertBindings()
     }
     
-    
-    func setupBindings() {
-        
-        viewModel
-            .output
-            .equityBalance
-            .drive(equityLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        viewModel
-            .output
-            .assetBalance
-            .drive(assetLabel.rx.text)
-            .disposed(by: disposeBag)
-
+    func setupTableViewBindings() {
         viewModel
             .output
             .currencyList
@@ -67,7 +58,23 @@ class MarketsViewController: UIViewController {
                     cell.currencySumbolLabel.text = pairName
                     cell.subTitleLabel.text = "\(pairName) : Forex"
         }.disposed(by: disposeBag)
+    }
+    
+    func setupLabelViewBindings() {
+        viewModel
+            .output
+            .equityBalance
+            .drive(equityLabel.rx.text)
+            .disposed(by: disposeBag)
         
+        viewModel
+            .output
+            .assetBalance
+            .drive(assetLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    func setupErrorAlertBindings() {
         viewModel
             .output
             .error
@@ -80,7 +87,6 @@ class MarketsViewController: UIViewController {
                     self.present(alert, animated: true)
                 }
         }).disposed(by: self.disposeBag)
-        
     }
 }
 

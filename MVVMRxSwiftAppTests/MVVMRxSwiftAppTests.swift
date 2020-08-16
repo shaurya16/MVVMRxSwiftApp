@@ -94,7 +94,7 @@ class MVVMRxSwiftAppTests: XCTestCase {
             .disposed(by: disposeBag)
         
         scheduler.start()
-        
+        //MARK: TODO: Need to a find a way to wait for the Update API calls and create XCTAsserts
         print("Total Events: \(results.events[0])\n")
     }
     
